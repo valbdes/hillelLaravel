@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('user_name');
@@ -28,9 +28,13 @@ class CreateOrderTable extends Migration
             $table->string('type')->unique();
             $table->timestamps();
 
-            // $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users');
 
-            // $table->foreign('status_id')->references('id')->on('orders_statuses');
+            $table->foreign('status_id')
+            ->references('id')
+            ->on('orders_status');
         });
     }
 
@@ -41,6 +45,14 @@ class CreateOrderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::table('orders', function(Blueprint $table) {
+            if(Schema::hasColumn('orders', 'user_id')) {
+                $table->dropForeign(['user_id']);
+            }
+            if(Schema::hasColumn('orders', 'status_id')) {
+                $table->dropForeign(['status_id']);
+            }
+        });
+        Schema::dropIfExists('orders');
     }
 }
