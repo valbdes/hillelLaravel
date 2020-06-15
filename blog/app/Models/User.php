@@ -42,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(\App\Models\Role::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(\App\Models\Order::class);
+    }
+
+    public function image()
+    {
+        return $this->morphOne(\App\Models\Image::class, 'imageаble');
+    }
 }
