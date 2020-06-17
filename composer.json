@@ -1,0 +1,9 @@
+{
+    "name": "valbdes/hillel-laravel",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            
+        }
+    }
+}

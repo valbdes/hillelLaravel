@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('user_phone');
             $table->string('country');
             $table->string('city');
-            $table->string('addres');
+            $table->string('address');
             $table->float('total');
             $table->unsignedBigInteger('status_id');
             $table->timestamps();

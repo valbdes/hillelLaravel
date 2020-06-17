@@ -14,8 +14,8 @@ class AddRolesForeignToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('rolese_id')->after('id');
-            $table->foreign('rolese_id')
+            $table->unsignedBigInteger('roles_id')->after('id');
+            $table->foreign('roles_id')
             ->references('id')
             ->on('roles');
         });
@@ -29,8 +29,8 @@ class AddRolesForeignToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            if(Schema::hasColumn('users', 'rolese_id')) {
-                $table->dropForeign(['rolese_id']);
+            if(Schema::hasColumn('users', 'roles_id')) {
+                $table->dropForeign(['roles_id']);
             }
         });
     }
